@@ -1,17 +1,17 @@
 package com.hdavidzhu.chatapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 // Declares the class ChatAdapter
-public class ChatAdapter extends ArrayAdapter {
+public class ChatAdapter extends ArrayAdapter<ChatHolder> {
 
     // Allows context to be accessed outside of the construction and become a class variable.
     Context context;
@@ -43,6 +43,18 @@ public class ChatAdapter extends ArrayAdapter {
 //        return sb.toString();
 //    }
 
+    @Override
+    public int getCount(){
+        Log.d("Stuff","Is getView working?");
+        return listChats.size();
+    }
+
+    @Override
+    public ChatHolder getItem(int position) {
+        Log.d("Stuff","Is getItem working?");
+        return listChats.get(position);
+    }
+
     // Get a view that displays the data at the specified position in the data set.
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -68,9 +80,12 @@ public class ChatAdapter extends ArrayAdapter {
         }
 
         viewHolder.name.setText(listChats.get(position).name);
+        Log.d(listChats.get(position).name,listChats.get(position).name);
         viewHolder.message.setText(listChats.get(position).message);
-        viewHolder.message.setText(listChats.get(position).name);
+        Log.d(listChats.get(position).message,listChats.get(position).message);
+        viewHolder.message.setText(listChats.get(position).timestamp);
+        Log.d(listChats.get(position).timestamp,listChats.get(position).timestamp);
 
         return convertView;
-    };
+    }
 }
